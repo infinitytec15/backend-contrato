@@ -18,6 +18,7 @@ public static class DependencyInjection
         // Registro dos repositórios
         services.AddScoped<IClientRepository, ClientRepository>();
         services.AddScoped<IContractRepository, ContractRepository>();
+        services.AddScoped<IUserRepository, UserRepository>();
 
         return services;
     }
