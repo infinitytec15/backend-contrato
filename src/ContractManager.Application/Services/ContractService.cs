@@ -57,5 +57,7 @@ public class ContractService : IContractService
         await _repository.UpdateAsync(contract);
         return true;
     }
+    
+
 
 }
