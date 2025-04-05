@@ -1,4 +1,3 @@
-using Microsoft.Extensions.DependencyInjection;
 using ContractManager.Application.Interfaces;
 using ContractManager.Application.Services;
 using Microsoft.Extensions.DependencyInjection;
@@ -10,6 +9,8 @@ public static class DependencyInjection
     public static IServiceCollection AddApplication(this IServiceCollection services)
     {
         services.AddScoped<IContractService, ContractService>();
+        services.AddScoped<IClientService, ClientService>();
+
         return services;
     }
 }
