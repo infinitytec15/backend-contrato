@@ -16,15 +16,12 @@ public class ContractService : IContractService
 
     public async Task<Contract> CreateContractAsync(CreateContractDto dto)
     {
-        var contract = new Contract
-        {
-            Id = Guid.NewGuid(),
-            Title = dto.Title,
-            Content = dto.Content,
-            ClientId = dto.ClientId,
-            CreatedAt = DateTime.UtcNow,
-            ExpirationDate = dto.ExpirationDate
-        };
+        var contract = new Contract(
+            title: dto.Title,
+            content: dto.Content,
+            clientId: dto.ClientId,
+            expirationDate: dto.ExpirationDate
+        );
 
         await _contractRepository.AddAsync(contract);
         return contract;

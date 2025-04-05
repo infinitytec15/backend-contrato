@@ -1,5 +1,5 @@
-using Microsoft.EntityFrameworkCore;
 using ContractManager.Domain.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace ContractManager.Infrastructure.Persistence;
 

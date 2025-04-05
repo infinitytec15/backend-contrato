@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "1CXpt8wQzS4=",
+  "dgSpecHash": "cqvHcoVZ1Yo=",
   "success": true,
   "projectFilePath": "C:\\Users\\gilbe\\Desktop\\contratobackend\\ContractManager\\src\\ContractManager.Application\\ContractManager.Application.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\gilbe\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\9.0.3\\microsoft.extensions.dependencyinjection.abstractions.9.0.3.nupkg.sha512"
+  ],
   "logs": []
 }
