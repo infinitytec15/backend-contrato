@@ -4,48 +4,37 @@ namespace ContractManager.Domain.Entities;
 
 public class Contract
 {
-    // Construtor principal com validações básicas
-    public Contract(string title, string content, Guid clientId, DateTime? expirationDate = null)
-    {
-        Id = Guid.NewGuid();
-        Title = string.IsNullOrWhiteSpace(title) ? throw new ArgumentException("Título é obrigatório") : title;
-        Content = string.IsNullOrWhiteSpace(content) ? throw new ArgumentException("Conteúdo é obrigatório") : content;
-        ClientId = clientId == Guid.Empty ? throw new ArgumentException("ClientId inválido") : clientId;
-        ExpirationDate = expirationDate;
-        CreatedAt = DateTime.UtcNow;
-        Status = ContractStatus.Draft;
-        Tags = new List<string>();
-    }
-
-    // Construtor protegido para uso do EF Core
-    protected Contract() { }
-
-    // Propriedades
     public Guid Id { get; private set; }
-    public string Title { get; private set; }
-    public string Content { get; private set; }
+    public string Title { get; private set; } = null!;
+    public string Content { get; private set; } = null!;
     public Guid ClientId { get; private set; }
     public ContractStatus Status { get; private set; }
     public DateTime CreatedAt { get; private set; }
     public DateTime? ExpirationDate { get; private set; }
-    public List<string> Tags { get; private set; }
 
-    // Métodos de domínio
-    public void AddTag(string tag)
+    private readonly List<string> _tags = new();
+    public IReadOnlyList<string> Tags => _tags;
+
+    private Contract() { }
+
+    public static Contract Create(string title, string content, Guid clientId, DateTime? expirationDate, List<string> tags)
     {
-        if (!string.IsNullOrWhiteSpace(tag) && !Tags.Contains(tag))
-            Tags.Add(tag);
+        var contract = new Contract
+        {
+            Id = Guid.NewGuid(),
+            Title = title,
+            Content = content,
+            ClientId = clientId,
+            Status = ContractStatus.Pending,
+            CreatedAt = DateTime.UtcNow,
+            ExpirationDate = expirationDate
+        };
+
+        contract._tags.AddRange(tags);
+        return contract;
     }
 
-    public void UpdateStatus(ContractStatus newStatus)
-    {
-        Status = newStatus;
-    }
+    public void Approve() => Status = ContractStatus.Approved;
 
-    public void UpdateContent(string title, string content, DateTime? expirationDate = null)
-    {
-        if (!string.IsNullOrWhiteSpace(title)) Title = title;
-        if (!string.IsNullOrWhiteSpace(content)) Content = content;
-        ExpirationDate = expirationDate;
-    }
+    public void Reject() => Status = ContractStatus.Rejected;
 }

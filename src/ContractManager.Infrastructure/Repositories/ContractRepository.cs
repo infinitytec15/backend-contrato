@@ -45,4 +45,6 @@ public class ContractRepository : IContractRepository
         _context.Contracts.Update(contract);
         await _context.SaveChangesAsync();
     }
+    
+
 }

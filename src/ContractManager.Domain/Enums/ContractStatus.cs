@@ -2,9 +2,7 @@ namespace ContractManager.Domain.Enums;
 
 public enum ContractStatus
 {
-    Draft,
-    Sent,
-    Signed,
-    Expired,
-    Cancelled
+    Pending = 0,
+    Approved = 1,
+    Rejected = 2
 }

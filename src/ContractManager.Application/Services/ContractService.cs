@@ -7,33 +7,55 @@ namespace ContractManager.Application.Services;
 
 public class ContractService : IContractService
 {
-    private readonly IContractRepository _contractRepository;
+    private readonly IContractRepository _repository;
 
-    public ContractService(IContractRepository contractRepository)
+    public ContractService(IContractRepository repository)
     {
-        _contractRepository = contractRepository;
+        _repository = repository;
     }
 
-    public async Task<Contract> CreateContractAsync(CreateContractDto dto)
+    public async Task<Contract> CreateAsync(CreateContractDto dto)
     {
-        var contract = new Contract(
-            title: dto.Title,
-            content: dto.Content,
-            clientId: dto.ClientId,
-            expirationDate: dto.ExpirationDate
+        var contract = Contract.Create(
+            dto.Title,
+            dto.Content,
+            dto.ClientId,
+            dto.ExpirationDate,
+            dto.Tags.ToList() // 💡 Aqui estava o erro: garantindo que seja List<string>
         );
 
-        await _contractRepository.AddAsync(contract);
+        await _repository.AddAsync(contract);
         return contract;
     }
 
-    public async Task<IEnumerable<Contract>> GetAllContractsAsync()
+    public async Task<IEnumerable<Contract>> GetAllAsync()
     {
-        return await _contractRepository.GetAllAsync();
+        return await _repository.GetAllAsync();
     }
 
-    public async Task<Contract?> GetContractByIdAsync(Guid id)
+    public async Task<Contract?> GetByIdAsync(Guid id)
     {
-        return await _contractRepository.GetByIdAsync(id);
+        return await _repository.GetByIdAsync(id);
     }
+    
+    public async Task<bool> ApproveAsync(Guid id)
+    {
+        var contract = await _repository.GetByIdAsync(id);
+        if (contract == null) return false;
+
+        contract.Approve();
+        await _repository.UpdateAsync(contract);
+        return true;
+    }
+
+    public async Task<bool> RejectAsync(Guid id)
+    {
+        var contract = await _repository.GetByIdAsync(id);
+        if (contract == null) return false;
+
+        contract.Reject();
+        await _repository.UpdateAsync(contract);
+        return true;
+    }
+
 }

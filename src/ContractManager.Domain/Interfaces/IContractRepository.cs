@@ -9,4 +9,6 @@ public interface IContractRepository
     Task AddAsync(Contract contract);
     Task UpdateAsync(Contract contract);
     Task DeleteAsync(Guid id);
+    
+   
 }
