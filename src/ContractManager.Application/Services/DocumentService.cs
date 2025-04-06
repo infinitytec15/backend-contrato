@@ -1,5 +1,6 @@
 using ContractManager.Application.DTOs;
 using ContractManager.Application.Interfaces;
+using ContractManager.Application.Interfaces.Storage;
 using ContractManager.Domain.Entities;
 using ContractManager.Domain.Interfaces;
 
@@ -8,15 +9,21 @@ namespace ContractManager.Application.Services;
 public class DocumentService : IDocumentService
 {
     private readonly IDocumentRepository _documentRepository;
+    private readonly IDocumentStorageService _storageService;
 
-    public DocumentService(IDocumentRepository documentRepository)
+    public DocumentService(IDocumentRepository documentRepository, IDocumentStorageService storageService)
     {
         _documentRepository = documentRepository;
+        _storageService = storageService;
     }
 
     public async Task<DocumentDto> UploadAsync(UploadDocumentDto dto)
     {
-        var document = Document.Create(dto.FileName, dto.FilePath, dto.ContractId);
+        byte[] fileBytes = Convert.FromBase64String(dto.FileBase64);
+
+        string filePath = await _storageService.UploadAsync(dto.FileName, fileBytes);
+
+        var document = Document.Create(dto.FileName, filePath, dto.ContractId);
         var saved = await _documentRepository.AddAsync(document);
 
         return new DocumentDto
@@ -26,6 +33,7 @@ public class DocumentService : IDocumentService
             FilePath = saved.FilePath
         };
     }
+
 
     public async Task<IEnumerable<DocumentDto>> GetAllAsync()
     {
