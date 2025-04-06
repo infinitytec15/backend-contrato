@@ -1,4 +1,5 @@
 using ContractManager.Domain.Enums;
+using ContractManager.Domain.Entities; // Garante que o ContractFormResponse está visível
 
 namespace ContractManager.Domain.Entities;
 
@@ -15,6 +16,9 @@ public class Contract
     private readonly List<string> _tags = new();
     public IReadOnlyList<string> Tags => _tags;
 
+    private readonly List<ContractFormResponse> _formResponses = new();
+    public IReadOnlyCollection<ContractFormResponse> FormResponses => _formResponses.AsReadOnly();
+
     private Contract() { }
 
     public static Contract Create(string title, string content, Guid clientId, DateTime? expirationDate, List<string> tags)
@@ -30,11 +34,18 @@ public class Contract
             ExpirationDate = expirationDate
         };
 
-        contract._tags.AddRange(tags);
+        if (tags is not null && tags.Any())
+            contract._tags.AddRange(tags);
+
         return contract;
     }
 
     public void Approve() => Status = ContractStatus.Approved;
-
     public void Reject() => Status = ContractStatus.Rejected;
+
+    public void AttachFormResponse(ContractFormResponse response)
+    {
+        if (response is not null)
+            _formResponses.Add(response);
+    }
 }
