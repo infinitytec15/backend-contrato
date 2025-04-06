@@ -11,10 +11,17 @@ namespace ContractManager.WebAPI.Controllers;
 public class ContractsController : ControllerBase
 {
     private readonly IContractService _contractService;
+    private readonly IZapsignService _zapsignService;
+    private readonly IContractFormService _contractFormService;
 
-    public ContractsController(IContractService contractService)
+    public ContractsController(
+        IContractService contractService,
+        IZapsignService zapsignService,
+        IContractFormService contractFormService)
     {
         _contractService = contractService;
+        _zapsignService = zapsignService;
+        _contractFormService = contractFormService;
     }
 
     [HttpPost]
@@ -43,7 +50,7 @@ public class ContractsController : ControllerBase
 
         return Ok(contract);
     }
-    
+
     [HttpPut("{id:guid}/approve")]
     public async Task<IActionResult> Approve(Guid id)
     {
@@ -57,14 +64,16 @@ public class ContractsController : ControllerBase
         var result = await _contractService.RejectAsync(id);
         return result ? NoContent() : NotFound();
     }
-	
-	[HttpPost("{id}/send-signature")]
-	public async Task<IActionResult> SendToSign(Guid id, [FromQuery] string email)
-	{
-    var contrato = await _contractService.GetByIdAsync(id);
-    var resultado = await _zapsignService.EnviarParaAssinaturaAsync(id, email, contrato.Content);
-    return Ok(new { link = resultado });
-}
 
+    [HttpPost("{id:guid}/send-signature")]
+    public async Task<IActionResult> SendToSign(Guid id, [FromQuery] string email)
+    {
+        if (string.IsNullOrWhiteSpace(email))
+            return BadRequest("E-mail é obrigatório para envio.");
 
+        var contractContent = await _contractFormService.GenerateContractWithResponsesAsync(id);
+        var result = await _zapsignService.EnviarParaAssinaturaAsync(id, email, contractContent);
+
+        return Ok(new { link = result });
+    }
 }

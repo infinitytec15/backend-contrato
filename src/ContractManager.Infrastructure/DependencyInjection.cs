@@ -1,5 +1,8 @@
 using ContractManager.Application.Interfaces.Storage;
+using ContractManager.Application.Interfaces;
 using ContractManager.Application.Services.Storage;
+using ContractManager.Application.Services.Zapsign;
+using ContractManager.Application.Services.External;
 using ContractManager.Domain.Interfaces;
 using ContractManager.Infrastructure.Persistence;
 using ContractManager.Infrastructure.Repositories;
@@ -17,18 +20,23 @@ public static class DependencyInjection
         services.AddDbContext<AppDbContext>(options =>
             options.UseNpgsql(config.GetConnectionString("DefaultConnection")));
 
-        // 🧱 Registro dos repositórios (DI)
+        // 📂 Repositórios do domínio
         services.AddScoped<IClientRepository, ClientRepository>();
         services.AddScoped<IUserRepository, UserRepository>();
         services.AddScoped<IDocumentRepository, DocumentRepository>();
         services.AddScoped<IContractRepository, ContractRepository>();
         services.AddScoped<IContractFormFieldRepository, ContractFormFieldRepository>();
         services.AddScoped<IContractFormRepository, ContractFormRepository>();
+
+        // ☁️ Armazenamento de arquivos (Wasabi - compatível com S3)
+        services.AddSingleton<IDocumentStorageService, WasabiStorageService>();
+
+        // 🔐 Integração Zapsign
+        services.AddHttpClient(); // Necessário para serviços externos
         services.AddScoped<IZapsignService, ZapsignService>();
 
-
-        // ☁️ Armazenamento de arquivos na nuvem (Wasabi/S3 compatível)
-        services.AddSingleton<IDocumentStorageService, WasabiStorageService>();
+        // 🤖 Integração com ChatGPT/OpenAI
+        services.AddHttpClient<IContractAiService, ContractAiService>();
 
         return services;
     }
