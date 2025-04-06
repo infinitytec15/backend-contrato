@@ -1,11 +1,19 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
   <ItemGroup>
+    <!-- 🔗 Referências às outras camadas -->
     <ProjectReference Include="..\ContractManager.Domain\ContractManager.Domain.csproj" />
     <ProjectReference Include="..\ContractManager.Application\ContractManager.Application.csproj" />
   </ItemGroup>
 
   <ItemGroup>
+    <!-- 🗃️ Entity Framework Core com PostgreSQL -->
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.3" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.3">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -14,10 +22,9 @@
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="9.0.4" />
   </ItemGroup>
 
-  <PropertyGroup>
-    <TargetFramework>net9.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-  </PropertyGroup>
+  <ItemGroup>
+    <!-- ☁️ AWS SDK para Wasabi (compatível com S3) -->
+    <PackageReference Include="AWSSDK.S3" Version="3.7.416.5" />
+  </ItemGroup>
 
 </Project>
