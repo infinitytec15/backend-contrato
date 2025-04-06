@@ -2,22 +2,33 @@
 
   <PropertyGroup>
     <TargetFramework>net9.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
   <ItemGroup>
-    <!-- Referência apenas à camada Domain (correto!) -->
+    <!-- 🔗 Referência ao projeto Domain -->
     <ProjectReference Include="..\ContractManager.Domain\ContractManager.Domain.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <!-- Pacotes necessários para AuthService e serviços da camada Application -->
+    <!-- 📦 Entity Framework Core (para uso de DbContext se necessário em serviços) -->
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.0" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="9.0.0" />
+
+    <!-- 🔐 JWT e autenticação -->
     <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="6.34.0" />
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.34.0" />
     <PackageReference Include="BCrypt.Net-Next" Version="4.0.2" />
+
+    <!-- ⚙️ Configuração por appsettings.json -->
+    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="9.0.0" />
+
+    <!-- ☁️ SDK AWS (Wasabi compatível com S3) -->
+    <PackageReference Include="AWSSDK.S3" Version="3.7.416.5" />
+
+    <!-- 🧪 Swagger (Annotations e Filters para exemplos em DTOs) -->
+    <PackageReference Include="Swashbuckle.AspNetCore.Annotations" Version="8.1.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore.Filters" Version="8.0.2" />
   </ItemGroup>
 
 </Project>
