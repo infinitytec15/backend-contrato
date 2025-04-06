@@ -1,37 +1,53 @@
-using ContractManager.Application.Interfaces;
-using RestSharp;
+using System.Net.Http.Headers;
+using System.Text;
 using System.Text.Json;
+using ContractManager.Application.Interfaces;
+using Microsoft.Extensions.Configuration;
 
 namespace ContractManager.Application.Services.Zapsign;
 
 public class ZapsignService : IZapsignService
 {
-    private readonly string _token = "SEU_TOKEN_AQUI"; // ⚠️ Ideal usar appsettings
+    private readonly HttpClient _httpClient;
+    private readonly string _zapsignToken;
+
+    public ZapsignService(IConfiguration configuration)
+    {
+        _httpClient = new HttpClient();
+        _zapsignToken = configuration["Zapsign:ApiKey"]
+                        ?? throw new Exception("Zapsign API key não configurada.");
+    }
 
     public async Task<string> EnviarParaAssinaturaAsync(Guid contractId, string signatoryEmail, string contractContent)
     {
-        var client = new RestClient("https://api.zapsign.com.br/api/v1/documents/");
-        var request = new RestRequest(Method.Post);
-        request.AddHeader("Content-Type", "application/json");
-        request.AddHeader("Authorization", $"Token {_token}");
-
-        var body = new
+        var payload = new
         {
+            sandbox = true,
             name = $"Contrato #{contractId}",
-            content_base64 = Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(contractContent)),
+            content_base64 = Convert.ToBase64String(Encoding.UTF8.GetBytes(contractContent)),
             signers = new[]
             {
-                new {
+                new
+                {
                     email = signatoryEmail,
-                    act = "sign",
+                    name = "Signatário",
+                    lock_email = true,
                     send_email = true
                 }
             }
         };
 
-        request.AddStringBody(JsonSerializer.Serialize(body), DataFormat.Json);
+        var request = new HttpRequestMessage(HttpMethod.Post, "https://api.zapsign.com.br/api/v1/documents")
+        {
+            Content = new StringContent(JsonSerializer.Serialize(payload), Encoding.UTF8, "application/json")
+        };
 
-        var response = await client.ExecuteAsync(request);
-        return response.Content ?? throw new Exception("Erro ao enviar para Zapsign.");
+        request.Headers.Authorization = new AuthenticationHeaderValue("Token", $"token={_zapsignToken}");
+
+        var response = await _httpClient.SendAsync(request);
+        response.EnsureSuccessStatusCode();
+
+        var result = await response.Content.ReadAsStringAsync();
+        return result;
     }
 }

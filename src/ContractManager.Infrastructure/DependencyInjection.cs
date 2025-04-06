@@ -24,6 +24,8 @@ public static class DependencyInjection
         services.AddScoped<IContractRepository, ContractRepository>();
         services.AddScoped<IContractFormFieldRepository, ContractFormFieldRepository>();
         services.AddScoped<IContractFormRepository, ContractFormRepository>();
+        services.AddScoped<IZapsignService, ZapsignService>();
+
 
         // ☁️ Armazenamento de arquivos na nuvem (Wasabi/S3 compatível)
         services.AddSingleton<IDocumentStorageService, WasabiStorageService>();

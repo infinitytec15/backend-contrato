@@ -57,5 +57,14 @@ public class ContractsController : ControllerBase
         var result = await _contractService.RejectAsync(id);
         return result ? NoContent() : NotFound();
     }
+	
+	[HttpPost("{id}/send-signature")]
+	public async Task<IActionResult> SendToSign(Guid id, [FromQuery] string email)
+	{
+    var contrato = await _contractService.GetByIdAsync(id);
+    var resultado = await _zapsignService.EnviarParaAssinaturaAsync(id, email, contrato.Content);
+    return Ok(new { link = resultado });
+}
+
 
 }
