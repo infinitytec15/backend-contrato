@@ -14,9 +14,26 @@ public class ContractRepository : IContractRepository
         _context = context;
     }
 
-    public async Task AddAsync(Contract contract)
+    public async Task<Contract?> GetByIdAsync(Guid id)
     {
-        await _context.Contracts.AddAsync(contract);
+        return await _context.Contracts.FindAsync(id);
+    }
+
+    public async Task<IEnumerable<Contract>> GetAllAsync()
+    {
+        return await _context.Contracts.ToListAsync();
+    }
+
+    public async Task<Contract> AddAsync(Contract contract)
+    {
+        _context.Contracts.Add(contract);
+        await _context.SaveChangesAsync();
+        return contract;
+    }
+
+    public async Task UpdateAsync(Contract contract)
+    {
+        _context.Contracts.Update(contract);
         await _context.SaveChangesAsync();
     }
 
@@ -30,21 +47,10 @@ public class ContractRepository : IContractRepository
         }
     }
 
-    public async Task<IEnumerable<Contract>> GetAllAsync()
+    public async Task<Contract?> GetContractWithResponsesAsync(Guid id)
     {
-        return await _context.Contracts.ToListAsync();
+        return await _context.Contracts
+            .Include(c => c.FormResponses)
+            .FirstOrDefaultAsync(c => c.Id == id);
     }
-
-    public async Task<Contract?> GetByIdAsync(Guid id)
-    {
-        return await _context.Contracts.FindAsync(id);
-    }
-
-    public async Task UpdateAsync(Contract contract)
-    {
-        _context.Contracts.Update(contract);
-        await _context.SaveChangesAsync();
-    }
-    
-
 }

@@ -7,18 +7,26 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <!-- 🔗 Referência às outras camadas do projeto -->
+    <ProjectReference Include="..\ContractManager.Application\ContractManager.Application.csproj" />
+    <ProjectReference Include="..\ContractManager.Infrastructure\ContractManager.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- 📦 ASP.NET Core (Web API) -->
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="9.0.3" />
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.3" />
+
+    <!-- 📦 EF Core Design (migrations) -->
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.3">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="8.1.0" />
-  </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\ContractManager.Application\ContractManager.Application.csproj" />
-    <ProjectReference Include="..\ContractManager.Infrastructure\ContractManager.Infrastructure.csproj" />
+    <!-- 📦 Swagger -->
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="8.1.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore.Annotations" Version="8.1.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore.Filters" Version="8.0.2" />
   </ItemGroup>
 
 </Project>
