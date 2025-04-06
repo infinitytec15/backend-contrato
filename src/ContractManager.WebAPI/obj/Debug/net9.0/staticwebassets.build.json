@@ -1,0 +1,12 @@
+{
+  "Version": 1,
+  "Hash": "6QfoZFVJk2ee6fE/x05thCcdI9XGoZdAcEOvdfgsd9s=",
+  "Source": "ContractManager.WebAPI",
+  "BasePath": "_content/ContractManager.WebAPI",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}

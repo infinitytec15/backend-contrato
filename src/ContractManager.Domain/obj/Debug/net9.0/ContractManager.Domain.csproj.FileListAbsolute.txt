@@ -1,0 +1,12 @@
+C:\Users\gilbe\Desktop\contratobackend\ContractManager\src\ContractManager.Domain\bin\Debug\net9.0\ContractManager.Domain.deps.json
+C:\Users\gilbe\Desktop\contratobackend\ContractManager\src\ContractManager.Domain\bin\Debug\net9.0\ContractManager.Domain.dll
+C:\Users\gilbe\Desktop\contratobackend\ContractManager\src\ContractManager.Domain\bin\Debug\net9.0\ContractManager.Domain.pdb
+C:\Users\gilbe\Desktop\contratobackend\ContractManager\src\ContractManager.Domain\obj\Debug\net9.0\ContractManager.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\gilbe\Desktop\contratobackend\ContractManager\src\ContractManager.Domain\obj\Debug\net9.0\ContractManager.Domain.AssemblyInfoInputs.cache
+C:\Users\gilbe\Desktop\contratobackend\ContractManager\src\ContractManager.Domain\obj\Debug\net9.0\ContractManager.Domain.AssemblyInfo.cs
+C:\Users\gilbe\Desktop\contratobackend\ContractManager\src\ContractManager.Domain\obj\Debug\net9.0\ContractManager.Domain.csproj.CoreCompileInputs.cache
+C:\Users\gilbe\Desktop\contratobackend\ContractManager\src\ContractManager.Domain\obj\Debug\net9.0\ContractManager.Domain.sourcelink.json
+C:\Users\gilbe\Desktop\contratobackend\ContractManager\src\ContractManager.Domain\obj\Debug\net9.0\ContractManager.Domain.dll
+C:\Users\gilbe\Desktop\contratobackend\ContractManager\src\ContractManager.Domain\obj\Debug\net9.0\refint\ContractManager.Domain.dll
+C:\Users\gilbe\Desktop\contratobackend\ContractManager\src\ContractManager.Domain\obj\Debug\net9.0\ContractManager.Domain.pdb
+C:\Users\gilbe\Desktop\contratobackend\ContractManager\src\ContractManager.Domain\obj\Debug\net9.0\ref\ContractManager.Domain.dll

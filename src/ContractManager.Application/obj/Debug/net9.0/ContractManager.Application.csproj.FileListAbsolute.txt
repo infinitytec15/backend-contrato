@@ -1,0 +1,16 @@
+C:\Users\gilbe\Desktop\contratobackend\ContractManager\src\ContractManager.Application\bin\Debug\net9.0\ContractManager.Application.deps.json
+C:\Users\gilbe\Desktop\contratobackend\ContractManager\src\ContractManager.Application\bin\Debug\net9.0\ContractManager.Application.dll
+C:\Users\gilbe\Desktop\contratobackend\ContractManager\src\ContractManager.Application\bin\Debug\net9.0\ContractManager.Application.pdb
+C:\Users\gilbe\Desktop\contratobackend\ContractManager\src\ContractManager.Application\bin\Debug\net9.0\ContractManager.Domain.dll
+C:\Users\gilbe\Desktop\contratobackend\ContractManager\src\ContractManager.Application\bin\Debug\net9.0\ContractManager.Domain.pdb
+C:\Users\gilbe\Desktop\contratobackend\ContractManager\src\ContractManager.Application\obj\Debug\net9.0\ContractManager.Application.csproj.AssemblyReference.cache
+C:\Users\gilbe\Desktop\contratobackend\ContractManager\src\ContractManager.Application\obj\Debug\net9.0\ContractManager.Application.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\gilbe\Desktop\contratobackend\ContractManager\src\ContractManager.Application\obj\Debug\net9.0\ContractManager.Application.AssemblyInfoInputs.cache
+C:\Users\gilbe\Desktop\contratobackend\ContractManager\src\ContractManager.Application\obj\Debug\net9.0\ContractManager.Application.AssemblyInfo.cs
+C:\Users\gilbe\Desktop\contratobackend\ContractManager\src\ContractManager.Application\obj\Debug\net9.0\ContractManager.Application.csproj.CoreCompileInputs.cache
+C:\Users\gilbe\Desktop\contratobackend\ContractManager\src\ContractManager.Application\obj\Debug\net9.0\ContractManager.Application.sourcelink.json
+C:\Users\gilbe\Desktop\contratobackend\ContractManager\src\ContractManager.Application\obj\Debug\net9.0\Contract.6F526972.Up2Date
+C:\Users\gilbe\Desktop\contratobackend\ContractManager\src\ContractManager.Application\obj\Debug\net9.0\ContractManager.Application.dll
+C:\Users\gilbe\Desktop\contratobackend\ContractManager\src\ContractManager.Application\obj\Debug\net9.0\refint\ContractManager.Application.dll
+C:\Users\gilbe\Desktop\contratobackend\ContractManager\src\ContractManager.Application\obj\Debug\net9.0\ContractManager.Application.pdb
+C:\Users\gilbe\Desktop\contratobackend\ContractManager\src\ContractManager.Application\obj\Debug\net9.0\ref\ContractManager.Application.dll
