@@ -48,6 +48,10 @@
         "net9.0": {
           "targetAlias": "net9.0",
           "dependencies": {
+            "AWSSDK.S3": {
+              "target": "Package",
+              "version": "[3.7.416.5, )"
+            },
             "BCrypt.Net-Next": {
               "target": "Package",
               "version": "[4.0.2, )"
@@ -63,6 +67,14 @@
             "Microsoft.IdentityModel.Tokens": {
               "target": "Package",
               "version": "[6.34.0, )"
+            },
+            "Swashbuckle.AspNetCore.Annotations": {
+              "target": "Package",
+              "version": "[8.1.0, )"
+            },
+            "Swashbuckle.AspNetCore.Filters": {
+              "target": "Package",
+              "version": "[8.0.2, )"
             },
             "System.IdentityModel.Tokens.Jwt": {
               "target": "Package",
@@ -114,6 +126,7 @@
           }
         },
         "warningProperties": {
+          "allWarningsAsErrors": true,
           "warnAsError": [
             "NU1605"
           ]
